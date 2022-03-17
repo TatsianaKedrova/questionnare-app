@@ -10,13 +10,18 @@ import Typography from "@mui/material/Typography";
 import FirstQuestion from "./FirstQuestion";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStateType } from "../../bll/store";
-import { setDoesBelieveInHoroscope } from "../../bll/questionsReducer";
+import {
+  setDoesBelieveInHoroscope,
+  setYourBirthDate,
+} from "../../bll/questionsReducer";
+import SecondQuestion from "./SecondQuestion";
+import ThirdQuestion from "./ThirdQuestion";
 
 const Questions = () => {
   const steps = [
     {
       label: "Question 1",
-      description: `Do you like horoscope?`,
+      description: `Do you believe in horoscope?`,
     },
     {
       label: "Question 2",
@@ -31,10 +36,14 @@ const Questions = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = useState(false);
   const [value, setValue] = useState<string>("");
+  const [birthDate, setBirthDate] = useState<string | null>("");
 
   //redux state
   const believeValue = useSelector<RootStateType, string>(
     (state) => state.questReducer.isBelieveInHoroscope
+  );
+  const birthdateValue = useSelector<RootStateType, string | null>(
+    (state) => state.questReducer.birthDate
   );
   const dispatch = useDispatch();
 
@@ -47,6 +56,10 @@ const Questions = () => {
     setError(false);
   };
 
+  const handleBirthDateChange = (newValue: string | null) => {
+    setBirthDate(newValue);
+  };
+
   const handleNext = () => {
     if (activeStep === 0) {
       if (!value) {
@@ -57,6 +70,7 @@ const Questions = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
     } else if (activeStep === 1) {
+      dispatch(setYourBirthDate({ birthDate: birthDate }));
     } else if (activeStep === 2) {
     } else {
       return;
@@ -64,6 +78,7 @@ const Questions = () => {
   };
 
   console.log("believeValue: ", believeValue);
+  console.log("birthdateValue: ", birthdateValue);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -91,13 +106,21 @@ const Questions = () => {
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
-              {index === 0 && (
+              {index === 0 ? (
                 <FirstQuestion
                   error={error}
                   handleRadioChange={handleRadioChange}
                   handleNext={handleNext}
                   radioValue={value}
                 />
+              ) : index === 1 ? (
+                <SecondQuestion
+                  birthDate={birthDate}
+                  handleNext={handleNext}
+                  handleBirthDateChange={handleBirthDateChange}
+                />
+              ) : (
+                <ThirdQuestion />
               )}
               <Box sx={{ mb: 2 }}>
                 <div>

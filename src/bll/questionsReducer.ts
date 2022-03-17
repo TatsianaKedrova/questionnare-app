@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type InitialStateType = {
   questionsCount: number;
   isBelieveInHoroscope: string;
-  birthDate: string;
+  birthDate: string | null;
   horoscopeSign: string;
 };
 
@@ -28,27 +28,13 @@ export const questionnaireSlice = createSlice({
 
       state.isBelieveInHoroscope = action.payload.isBelieveInHoroscope;
     },
+    setYourBirthDate(state, action: PayloadAction<{ birthDate: string | null }>) {
+      state.birthDate = action.payload.birthDate;
+    },
   },
 });
 
-export const { setDoesBelieveInHoroscope } = questionnaireSlice.actions;
+export const { setDoesBelieveInHoroscope, setYourBirthDate } =
+  questionnaireSlice.actions;
 
 export const questionsReducer = questionnaireSlice.reducer;
-
-// reducers: {
-//     incrementItem(state, action: PayloadAction<{ id: string }>) {
-//       const incrementedItem = state.find(
-//         (element) => element.id === action.payload.id
-//       );
-//       if (incrementedItem) {
-//         incrementedItem.itemsCount++;
-//       }
-//     },
-//     decrementItem(state, action: PayloadAction<{ id: string }>) {
-//       const decrementedItem = state.find(
-//         (element) => element.id === action.payload.id
-//       );
-//       if (decrementedItem) {
-//         decrementedItem.itemsCount--;
-//       }
-//     },

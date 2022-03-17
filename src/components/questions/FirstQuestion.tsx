@@ -1,6 +1,7 @@
 import { Box, Button, FormControlLabel, RadioGroup } from "@mui/material";
 import React, { ChangeEvent } from "react";
 import Radio from "@mui/material/Radio";
+import ButtonCommon from "../../commonComponents/ButtonCommon";
 
 type FirstQuestionType = {
   error: boolean;
@@ -44,9 +45,7 @@ const FirstQuestion: React.FC<FirstQuestionType> = ({
         />
       </RadioGroup>
       {error && <Box sx={{ color: "#C6250D" }}>Please select an option!</Box>}
-      <Button variant="contained" onClick={handleNext}>
-        Next Question
-      </Button>
+      <ButtonCommon handleNext={handleNext} />
     </>
   );
 };
