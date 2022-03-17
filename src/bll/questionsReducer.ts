@@ -1,17 +1,39 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {};
+// export type YesNo = "yes" | "no" | "";
+
+type InitialStateType = {
+  questionsCount: number;
+  isBelieveInHoroscope: string;
+  birthDate: string;
+  horoscopeSign: string;
+};
+
+const initialState: InitialStateType = {
+  questionsCount: 3,
+  isBelieveInHoroscope: "",
+  birthDate: "",
+  horoscopeSign: "",
+};
 
 export const questionnaireSlice = createSlice({
   name: "questions",
   initialState,
-  reducers: {},
+  reducers: {
+    setDoesBelieveInHoroscope(
+      state,
+      action: PayloadAction<{ isBelieveInHoroscope: string }>
+    ) {
+      console.log("inside dispatch method");
+
+      state.isBelieveInHoroscope = action.payload.isBelieveInHoroscope;
+    },
+  },
 });
 
-export const {} = questionnaireSlice.actions;
+export const { setDoesBelieveInHoroscope } = questionnaireSlice.actions;
 
 export const questionsReducer = questionnaireSlice.reducer;
-
 
 // reducers: {
 //     incrementItem(state, action: PayloadAction<{ id: string }>) {
