@@ -5,16 +5,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./bll/store";
-import { BrowserRouter } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
         <CssBaseline />
         <App />
-      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

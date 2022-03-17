@@ -2,17 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // export type YesNo = "yes" | "no" | "";
 
-type InitialStateType = {
-  questionsCount: number;
+export type InitialStateType = {
   isBelieveInHoroscope: string;
   birthDate: string | null;
   horoscopeSign: string;
 };
 
 const initialState: InitialStateType = {
-  questionsCount: 3,
   isBelieveInHoroscope: "",
-  birthDate: "",
+  birthDate: null,
   horoscopeSign: "",
 };
 
