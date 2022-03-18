@@ -13,7 +13,7 @@ const MainPage = ({ children }: { children: JSX.Element }): React.ReactElement =
           left: "33%",
           width: "700px",
           height: "600px",
-          backgroundColor: "white",
+          backgroundColor: theme.palette.info.main,
           borderRadius: "10px",
         }}
       >
