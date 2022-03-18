@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { HoroscopeOptionsType } from "../components/questions/ThirdQuestion";
 
 // export type YesNo = "yes" | "no" | "";
 
 export type InitialStateType = {
   isBelieveInHoroscope: string;
   birthDate: string | null;
-  horoscopeSign: string;
+  horoscopeSign: HoroscopeOptionsType | null;
   mode: boolean;
 };
 
 const initialState: InitialStateType = {
   isBelieveInHoroscope: "",
   birthDate: null,
-  horoscopeSign: "",
+  horoscopeSign: null,
   mode: false,
 };
 
@@ -34,7 +35,7 @@ export const questionnaireSlice = createSlice({
     ) {
       state.birthDate = action.payload.birthDate;
     },
-    setYourHoroscope(state, action: PayloadAction<{ horoscopeSign: string }>) {
+    setYourHoroscope(state, action: PayloadAction<{ horoscopeSign: HoroscopeOptionsType | null }>) {
       state.horoscopeSign = action.payload.horoscopeSign;
     },
     toggleMode(state, action: PayloadAction) {

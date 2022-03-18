@@ -16,7 +16,7 @@ import {
   setYourHoroscope,
 } from "../../redux/questionsReducer";
 import SecondQuestion from "./SecondQuestion";
-import ThirdQuestion from "./ThirdQuestion";
+import ThirdQuestion, { HoroscopeOptionsType } from "./ThirdQuestion";
 import AllResultsModal from "./AllResultsModal";
 import { RootStateType } from "../../redux/store";
 import { useTheme } from "@mui/material";
@@ -41,7 +41,7 @@ const Questions = () => {
   const [error, setError] = useState(false);
   const [value, setValue] = useState<string>("");
   const [birthDate, setBirthDate] = useState<Date | null>(null);
-  const [horoscope, setHoroscope] = useState<string>("");
+  const [horoscope, setHoroscope] = useState<HoroscopeOptionsType | null>(null);
   const [open, setOpen] = React.useState(false);
 
   const theme = useTheme();
@@ -64,7 +64,12 @@ const Questions = () => {
     setError(false);
   };
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    console.log("inside handleOpen");
+    setOpen(true);
+  };
+
+  console.log("open: ", open);
 
   const handleClose = () => setOpen(false);
 
@@ -72,11 +77,12 @@ const Questions = () => {
     setBirthDate(newValue);
   };
 
-  const handleSetHoroscope = () => {
-    setHoroscope(horoscope);
+  const handleSetHoroscope = (
+    event: React.SyntheticEvent<Element, Event>,
+    newValue: HoroscopeOptionsType | null
+  ) => {
+    setHoroscope(newValue);
   };
-
-  const handleAllAnswers = () => {};
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -90,6 +96,7 @@ const Questions = () => {
       dispatch(setYourBirthDate({ birthDate: formattedBirthDate }));
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (activeStep === 2) {
+      console.log("inside handleNext");
       dispatch(setYourHoroscope({ horoscopeSign: horoscope }));
       handleOpen();
     } else {
@@ -140,7 +147,7 @@ const Questions = () => {
               ) : (
                 <ThirdQuestion
                   handleNext={handleNext}
-                  handleHoroscopeChange={handleSetHoroscope}
+                  handleSetHoroscope={handleSetHoroscope}
                   horoscope={horoscope}
                 />
               )}
@@ -168,7 +175,11 @@ const Questions = () => {
         ))}
       </Stepper>
       {activeStep === steps.length && (
-        <Paper square elevation={3} sx={{ p: 3, backgroundColor: theme.palette.success.main }}>
+        <Paper
+          square
+          elevation={3}
+          sx={{ p: 3, backgroundColor: theme.palette.success.main }}
+        >
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset

@@ -2,14 +2,33 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import ButtonCommon from "../../commonComponents/ButtonCommon";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../redux/store";
 
 type ThirdQuestionPropsType = {
-  horoscope: string;
-  handleHoroscopeChange: () => void;
+  handleSetHoroscope: (
+    event: React.SyntheticEvent<Element, Event>,
+    newValue: HoroscopeOptionsType | null
+  ) => void;
+  horoscope: HoroscopeOptionsType | null;
   handleNext: () => void;
 };
 
-const horoscopeOptions = [
+export type HoroscopeOptionsType =
+  | "Aquarius"
+  | "Aries"
+  | "Cancer"
+  | "Capricorn"
+  | "Gemini"
+  | "Leo"
+  | "Libra"
+  | "Pisces"
+  | "Sagittarius"
+  | "Scorpio"
+  | "Taurus"
+  | "Virgo";
+
+const horoscopeOptions: HoroscopeOptionsType[] = [
   "Aquarius",
   "Aries",
   "Cancer",
@@ -25,24 +44,32 @@ const horoscopeOptions = [
 ];
 
 const ThirdQuestion: React.FC<ThirdQuestionPropsType> = ({
-  handleHoroscopeChange,
   handleNext,
   horoscope,
+  handleSetHoroscope,
 }) => {
+  const horoscopeValue = useSelector<
+    RootStateType,
+    HoroscopeOptionsType | null
+  >((state) => state.questReducer.horoscopeSign);
+  console.log("horoscopeValue: ", horoscopeValue);
+
   return (
     <>
       <Autocomplete
-        value={horoscope}
         disablePortal
+        value={horoscope}
         id="combo-box-demo"
         options={horoscopeOptions}
         sx={{ width: 300, m: "20px 0" }}
-        renderInput={(params) => <TextField {...params} label="Horoscope" />}
-        onChange={handleHoroscopeChange}
-        forcePopupIcon
+        onChange={handleSetHoroscope}
+        renderInput={(params) => (
+          <TextField {...params} label="Zodiac" variant="standard" />
+        )}
         clearIcon={null}
       />
-      <ButtonCommon name={"Get quesionnaire results"} handleNext={handleNext}/>
+
+      <ButtonCommon name={"Get another results"} handleNext={handleNext} />
     </>
   );
 };

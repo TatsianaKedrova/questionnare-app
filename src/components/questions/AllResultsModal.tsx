@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ButtonCommon from "../../commonComponents/ButtonCommon";
+import { HoroscopeOptionsType } from "./ThirdQuestion";
 
 type AllResultsModalPropsType = {
   open: boolean;
   handleClose: () => void;
   handleReset: () => void;
-  thirdAnswer: string;
+  thirdAnswer: HoroscopeOptionsType | null;
   secondAnswer: string | null;
   firstAnswer: string;
 };
