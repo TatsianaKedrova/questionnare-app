@@ -5,14 +5,12 @@ export type InitialStateType = {
   isBelieveInHoroscope: string;
   birthDate: string | null;
   horoscopeSign: HoroscopeOptionsType | null;
-  mode: boolean;
 };
 
 const initialState: InitialStateType = {
   isBelieveInHoroscope: "",
   birthDate: null,
   horoscopeSign: null,
-  mode: false,
 };
 
 export const questionnaireSlice = createSlice({
@@ -33,16 +31,16 @@ export const questionnaireSlice = createSlice({
     ) {
       state.birthDate = action.payload.birthDate;
     },
-    setYourHoroscope(state, action: PayloadAction<{ horoscopeSign: HoroscopeOptionsType | null }>) {
+    setYourHoroscope(
+      state,
+      action: PayloadAction<{ horoscopeSign: HoroscopeOptionsType | null }>
+    ) {
       state.horoscopeSign = action.payload.horoscopeSign;
-    },
-    toggleMode(state, action: PayloadAction) {
-      state.mode = !state.mode;
     },
   },
 });
 
-export const { setDoesBelieveInHoroscope, setYourBirthDate, setYourHoroscope, toggleMode } =
+export const { setDoesBelieveInHoroscope, setYourBirthDate, setYourHoroscope } =
   questionnaireSlice.actions;
 
 export const questionsReducer = questionnaireSlice.reducer;

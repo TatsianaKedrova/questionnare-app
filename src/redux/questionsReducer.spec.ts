@@ -13,7 +13,6 @@ beforeEach(() => {
     isBelieveInHoroscope: "no",
     birthDate: null,
     horoscopeSign: "Libra",
-    mode: false,
   };
 });
 
