@@ -52,7 +52,10 @@ const AllResultsModal: React.FC<AllResultsModalPropsType> = ({
           <Box> 2. What is your birth date? Answer: {secondAnswer}</Box>
           <Box> 3. What is your zodiac sign? Answer: {thirdAnswer}</Box>
         </Typography>
+        <Box sx={{textAlign: "center"}}>
         <ButtonCommon name="Start Again" handleNext={handleReset} />
+
+        </Box>
       </Box>
     </Modal>
   );
