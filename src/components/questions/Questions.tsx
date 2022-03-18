@@ -5,7 +5,6 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FirstQuestion from "./FirstQuestion";
 import { useDispatch, useSelector } from "react-redux";
@@ -174,18 +173,6 @@ const Questions = () => {
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length && (
-        <Paper
-          square
-          elevation={3}
-          sx={{ p: 3, backgroundColor: theme.palette.success.main }}
-        >
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )}
     </Box>
   );
 };

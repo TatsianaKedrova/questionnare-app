@@ -16,8 +16,6 @@ beforeEach(() => {
   };
 });
 
-//didn't finish it yet
-
 test("setting the radio button value correctly", () => {
   const endState = questionsReducer(
     startState,
