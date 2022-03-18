@@ -4,7 +4,7 @@ import { TextFieldProps } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import ButtonCommon from "../../commonComponents/ButtonCommon";
+import ButtonCommon from "../commonComponents/ButtonCommon";
 import { Box } from "@mui/material";
 
 type SecondQuestionPropsType = {

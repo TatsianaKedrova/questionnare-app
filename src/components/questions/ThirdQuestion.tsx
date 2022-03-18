@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import ButtonCommon from "../../commonComponents/ButtonCommon";
+import ButtonCommon from "../commonComponents/ButtonCommon";
 import { useSelector } from "react-redux";
 import { RootStateType } from "../../redux/store";
 

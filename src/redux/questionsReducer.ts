@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HoroscopeOptionsType } from "../components/questions/ThirdQuestion";
 
-// export type YesNo = "yes" | "no" | "";
-
 export type InitialStateType = {
   isBelieveInHoroscope: string;
   birthDate: string | null;

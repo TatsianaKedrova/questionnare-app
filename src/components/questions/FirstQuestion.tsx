@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import React, { ChangeEvent } from "react";
 import Radio from "@mui/material/Radio";
-import ButtonCommon from "../../commonComponents/ButtonCommon";
+import ButtonCommon from "../commonComponents/ButtonCommon";
 
 type FirstQuestionType = {
   error: boolean;

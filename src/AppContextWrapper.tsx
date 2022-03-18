@@ -6,12 +6,17 @@ export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
 
+enum ModeTypes {
+  DARK = "dark",
+  LIGHT = "light",
+}
+
 const AppContextWrapper = () => {
-  const [mode, setMode] = React.useState<PaletteMode | undefined>("light");
+  const [mode, setMode] = React.useState<ModeTypes>(ModeTypes.LIGHT);
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => (prevMode === ModeTypes.LIGHT ? ModeTypes.DARK : ModeTypes.LIGHT));
       },
     }),
     []
@@ -20,7 +25,7 @@ const AppContextWrapper = () => {
   const getDesignTokens = (mode: PaletteMode | undefined) => ({
     palette: {
       mode,
-      ...(mode === "light"
+      ...(mode === ModeTypes.LIGHT
         ? {
             primary: {
               main: "#2998E5",
