@@ -23,6 +23,7 @@ const FirstQuestion: React.FC<FirstQuestionType> = ({
   return (
     <>
       <RadioGroup
+        sx={{ m: "20px 0" }}
         row
         aria-labelledby="demo-error-radios"
         name="horoscope"
@@ -45,7 +46,7 @@ const FirstQuestion: React.FC<FirstQuestionType> = ({
         />
       </RadioGroup>
       {error && <Box sx={{ color: "#C6250D" }}>Please select an option!</Box>}
-      <ButtonCommon handleNext={handleNext} />
+      <ButtonCommon handleNext={handleNext} name={"Next question"} />
     </>
   );
 };

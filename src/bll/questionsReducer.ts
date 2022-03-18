@@ -26,13 +26,19 @@ export const questionnaireSlice = createSlice({
 
       state.isBelieveInHoroscope = action.payload.isBelieveInHoroscope;
     },
-    setYourBirthDate(state, action: PayloadAction<{ birthDate: string | null }>) {
+    setYourBirthDate(
+      state,
+      action: PayloadAction<{ birthDate: string | null }>
+    ) {
       state.birthDate = action.payload.birthDate;
+    },
+    setYourHoroscope(state, action: PayloadAction<{ horoscopeSign: string }>) {
+      state.horoscopeSign = action.payload.horoscopeSign;
     },
   },
 });
 
-export const { setDoesBelieveInHoroscope, setYourBirthDate } =
+export const { setDoesBelieveInHoroscope, setYourBirthDate, setYourHoroscope } =
   questionnaireSlice.actions;
 
 export const questionsReducer = questionnaireSlice.reducer;

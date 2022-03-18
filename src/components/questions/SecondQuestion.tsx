@@ -32,7 +32,7 @@ const SecondQuestion: React.FC<SecondQuestionPropsType> = ({
           />
         </Box>
       </LocalizationProvider>
-      <ButtonCommon handleNext={handleNext} />
+      <ButtonCommon handleNext={handleNext} name={"Next question"} />
     </>
   );
 };

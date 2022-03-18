@@ -8,13 +8,17 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FirstQuestion from "./FirstQuestion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  InitialStateType,
   setDoesBelieveInHoroscope,
   setYourBirthDate,
+  setYourHoroscope,
 } from "../../bll/questionsReducer";
 import SecondQuestion from "./SecondQuestion";
 import ThirdQuestion from "./ThirdQuestion";
+import AllResultsModal from "./AllResultsModal";
+import { RootStateType } from "../../bll/store";
 
 const Questions = () => {
   const steps = [
@@ -37,9 +41,14 @@ const Questions = () => {
   const [value, setValue] = useState<string>("");
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [horoscope, setHoroscope] = useState<string>("");
+  const [open, setOpen] = React.useState(false);
 
   const formattedBirthDate = `${birthDate?.getDay()}/${birthDate?.getDate()}/${birthDate?.getFullYear()}`;
   console.log("formatted date: ", formattedBirthDate);
+
+  const questionsState = useSelector<RootStateType, InitialStateType>(
+    (state) => state.questReducer
+  );
 
   const dispatch = useDispatch();
 
@@ -52,6 +61,10 @@ const Questions = () => {
     setError(false);
   };
 
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => setOpen(false);
+
   const handleBirthDateChange = (newValue: Date | null) => {
     setBirthDate(newValue);
   };
@@ -59,6 +72,8 @@ const Questions = () => {
   const handleSetHoroscope = () => {
     setHoroscope(horoscope);
   };
+
+  const handleAllAnswers = () => {};
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -72,8 +87,8 @@ const Questions = () => {
       dispatch(setYourBirthDate({ birthDate: formattedBirthDate }));
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (activeStep === 2) {
-    //   dispatch(setYourHoroscope({ horoscope: horoscope }));
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      dispatch(setYourHoroscope({ horoscopeSign: horoscope }));
+      handleOpen();
     } else {
       return;
     }
@@ -84,6 +99,7 @@ const Questions = () => {
   };
 
   const handleReset = () => {
+    handleClose();
     setActiveStep(0);
   };
 
@@ -119,13 +135,24 @@ const Questions = () => {
                   handleBirthDateChange={handleBirthDateChange}
                 />
               ) : (
-                <ThirdQuestion />
+                <ThirdQuestion
+                  handleNext={handleNext}
+                  handleHoroscopeChange={handleSetHoroscope}
+                  horoscope={horoscope}
+                />
               )}
               <Box sx={{ mb: 2 }}>
+                <AllResultsModal
+                  open={open}
+                  handleClose={handleClose}
+                  handleReset={handleReset}
+                  firstAnswer={questionsState.isBelieveInHoroscope}
+                  secondAnswer={questionsState.birthDate}
+                  thirdAnswer={questionsState.horoscopeSign}
+                />
                 <div>
-                  {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
                   <Button
-                    disabled={index === 0}
+                    disabled={index === 0 || index > 2}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -138,7 +165,7 @@ const Questions = () => {
         ))}
       </Stepper>
       {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
+        <Paper square elevation={3} sx={{ p: 3, backgroundColor: "#BF8AED" }}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset
