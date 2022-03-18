@@ -22,7 +22,6 @@ const AppContextWrapper = () => {
       mode,
       ...(mode === "light"
         ? {
-            // palette values for light mode
             primary: {
               main: "#2998E5",
               light: "#8FDDF7",
@@ -39,7 +38,6 @@ const AppContextWrapper = () => {
             },
           }
         : {
-            // palette values for dark mode
             primary: {
               main: "#ebecf1",
               light: "#c0c7c9",

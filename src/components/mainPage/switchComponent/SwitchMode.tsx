@@ -1,6 +1,6 @@
 import React from "react";
 import Switch from "@mui/material/Switch";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 type SwitchModePropsType = {
   toggleMode: () => void;
@@ -57,9 +57,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const SwitchMode: React.FC<SwitchModePropsType> = ({ toggleMode, mode }) => {
-  const theme = useTheme();
-  console.log("mode: ", mode);
-  
 
   return (
     <>

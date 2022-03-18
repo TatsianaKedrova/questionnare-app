@@ -14,11 +14,11 @@ import {
   setDoesBelieveInHoroscope,
   setYourBirthDate,
   setYourHoroscope,
-} from "../../bll/questionsReducer";
+} from "../../redux/questionsReducer";
 import SecondQuestion from "./SecondQuestion";
 import ThirdQuestion from "./ThirdQuestion";
 import AllResultsModal from "./AllResultsModal";
-import { RootStateType } from "../../bll/store";
+import { RootStateType } from "../../redux/store";
 import { useTheme } from "@mui/material";
 
 const steps = [
