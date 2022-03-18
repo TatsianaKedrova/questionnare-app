@@ -19,29 +19,32 @@ import SecondQuestion from "./SecondQuestion";
 import ThirdQuestion from "./ThirdQuestion";
 import AllResultsModal from "./AllResultsModal";
 import { RootStateType } from "../../bll/store";
+import { useTheme } from "@mui/material";
+
+const steps = [
+  {
+    label: "Question 1",
+    description: `Do you believe in horoscope?`,
+  },
+  {
+    label: "Question 2",
+    description: "What is your birth date?",
+  },
+  {
+    label: "Question 3",
+    description: `Choose your horoscope from the list.`,
+  },
+];
 
 const Questions = () => {
-  const steps = [
-    {
-      label: "Question 1",
-      description: `Do you believe in horoscope?`,
-    },
-    {
-      label: "Question 2",
-      description: "What is your birth date?",
-    },
-    {
-      label: "Question 3",
-      description: `Choose your horoscope from the list.`,
-    },
-  ];
-
   const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = useState(false);
   const [value, setValue] = useState<string>("");
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [horoscope, setHoroscope] = useState<string>("");
   const [open, setOpen] = React.useState(false);
+
+  const theme = useTheme();
 
   const formattedBirthDate = `${birthDate?.getDay()}/${birthDate?.getDate()}/${birthDate?.getFullYear()}`;
   console.log("formatted date: ", formattedBirthDate);
@@ -165,7 +168,7 @@ const Questions = () => {
         ))}
       </Stepper>
       {activeStep === steps.length && (
-        <Paper square elevation={3} sx={{ p: 3, backgroundColor: "#BF8AED" }}>
+        <Paper square elevation={3} sx={{ p: 3, backgroundColor: theme.palette.success.main }}>
           <Typography>All steps completed - you&apos;re finished</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset

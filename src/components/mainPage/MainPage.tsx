@@ -1,9 +1,11 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { ReactElement } from "react";
+import { Box, useTheme } from "@mui/material";
+import React from "react";
 
-const MainPage = ({ children }: { children: JSX.Element }): ReactElement => {
+const MainPage = ({ children }: { children: JSX.Element }): React.ReactElement => {
+
+  const theme = useTheme();
   return (
-    <Box sx={{ backgroundColor: "#8FDDF7", height: "100vh" }}>
+    <Box sx={{ backgroundColor: theme.palette.primary.light, height: "100vh" }}>
       <Box
         sx={{
           position: "absolute",

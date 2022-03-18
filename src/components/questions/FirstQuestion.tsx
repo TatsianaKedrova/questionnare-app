@@ -1,4 +1,9 @@
-import { Box, Button, FormControlLabel, RadioGroup } from "@mui/material";
+import {
+  Box,
+  FormControlLabel,
+  RadioGroup,
+  useTheme,
+} from "@mui/material";
 import React, { ChangeEvent } from "react";
 import Radio from "@mui/material/Radio";
 import ButtonCommon from "../../commonComponents/ButtonCommon";
@@ -20,6 +25,8 @@ const FirstQuestion: React.FC<FirstQuestionType> = ({
   handleNext,
   radioValue,
 }) => {
+  const theme = useTheme();
+
   return (
     <>
       <RadioGroup
@@ -35,17 +42,21 @@ const FirstQuestion: React.FC<FirstQuestionType> = ({
           control={<Radio />}
           label="Yes"
           labelPlacement="bottom"
-          sx={{ color: "#59CDF3" }}
+          sx={{ color: theme.palette.primary.main }}
         />
         <FormControlLabel
           value="no"
           control={<Radio color={"error"} />}
           label="No"
           labelPlacement="bottom"
-          sx={{ color: "#C6250D" }}
+          sx={{ color: theme.palette.error.main }}
         />
       </RadioGroup>
-      {error && <Box sx={{ color: "#C6250D" }}>Please select an option!</Box>}
+      {error && (
+        <Box sx={{ color: theme.palette.error.main }}>
+          Please select an option!
+        </Box>
+      )}
       <ButtonCommon handleNext={handleNext} name={"Next question"} />
     </>
   );
