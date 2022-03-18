@@ -1,4 +1,4 @@
-import { Button, useTheme } from "@mui/material";
+import { Button, useTheme, ButtonProps } from "@mui/material";
 import React from "react";
 
 type ButtonCommonType = {
@@ -10,6 +10,7 @@ const ButtonCommon: React.FC<ButtonCommonType> = ({ handleNext, name }) => {
   const theme = useTheme();
   return (
     <Button
+      disableFocusRipple
       variant="contained"
       onClick={handleNext}
       sx={{ color: theme.palette.info.main }}
