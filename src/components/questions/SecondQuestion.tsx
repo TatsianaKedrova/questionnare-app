@@ -1,5 +1,6 @@
 import React from "react";
 import DateAdapter from "@mui/lab/AdapterDateFns";
+import { TextFieldProps } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
@@ -7,9 +8,9 @@ import ButtonCommon from "../../commonComponents/ButtonCommon";
 import { Box } from "@mui/material";
 
 type SecondQuestionPropsType = {
-  handleBirthDateChange: (newValue: string | null) => void;
+  handleBirthDateChange: (newValue: Date | null) => void;
   handleNext: () => void;
-  birthDate: string | null;
+  birthDate: Date | null;
 };
 
 const SecondQuestion: React.FC<SecondQuestionPropsType> = ({
@@ -17,6 +18,8 @@ const SecondQuestion: React.FC<SecondQuestionPropsType> = ({
   handleNext,
   handleBirthDateChange,
 }) => {
+
+  
   return (
     <>
       <LocalizationProvider dateAdapter={DateAdapter}>
@@ -25,7 +28,7 @@ const SecondQuestion: React.FC<SecondQuestionPropsType> = ({
             label="Choose your birthdate"
             value={birthDate}
             onChange={(newValue) => handleBirthDateChange(newValue)}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params: TextFieldProps) => <TextField {...params} />}
           />
         </Box>
       </LocalizationProvider>

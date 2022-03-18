@@ -8,8 +8,7 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FirstQuestion from "./FirstQuestion";
-import { useDispatch, useSelector } from "react-redux";
-import { RootStateType } from "../../bll/store";
+import { useDispatch } from "react-redux";
 import {
   setDoesBelieveInHoroscope,
   setYourBirthDate,
@@ -36,15 +35,12 @@ const Questions = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = useState(false);
   const [value, setValue] = useState<string>("");
-  const [birthDate, setBirthDate] = useState<string | null>("");
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const [horoscope, setHoroscope] = useState<string>("");
 
-  //redux state
-  const believeValue = useSelector<RootStateType, string>(
-    (state) => state.questReducer.isBelieveInHoroscope
-  );
-  const birthdateValue = useSelector<RootStateType, string | null>(
-    (state) => state.questReducer.birthDate
-  );
+  const formattedBirthDate = `${birthDate?.getDay()}/${birthDate?.getDate()}/${birthDate?.getFullYear()}`;
+  console.log("formatted date: ", formattedBirthDate);
+
   const dispatch = useDispatch();
 
   const handleRadioChange = (
@@ -56,29 +52,32 @@ const Questions = () => {
     setError(false);
   };
 
-  const handleBirthDateChange = (newValue: string | null) => {
+  const handleBirthDateChange = (newValue: Date | null) => {
     setBirthDate(newValue);
+  };
+
+  const handleSetHoroscope = () => {
+    setHoroscope(horoscope);
   };
 
   const handleNext = () => {
     if (activeStep === 0) {
       if (!value) {
         setError(true);
-        console.log("there is error cos option is not chosen");
       } else {
         dispatch(setDoesBelieveInHoroscope({ isBelieveInHoroscope: value }));
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
     } else if (activeStep === 1) {
-      dispatch(setYourBirthDate({ birthDate: birthDate }));
+      dispatch(setYourBirthDate({ birthDate: formattedBirthDate }));
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else if (activeStep === 2) {
+    //   dispatch(setYourHoroscope({ horoscope: horoscope }));
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
       return;
     }
   };
-
-  console.log("believeValue: ", believeValue);
-  console.log("birthdateValue: ", birthdateValue);
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -124,13 +123,7 @@ const Questions = () => {
               )}
               <Box sx={{ mb: 2 }}>
                 <div>
-                  {/* <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? "Finish" : "Continue"}
-                  </Button> */}
+                  {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
                   <Button
                     disabled={index === 0}
                     onClick={handleBack}
