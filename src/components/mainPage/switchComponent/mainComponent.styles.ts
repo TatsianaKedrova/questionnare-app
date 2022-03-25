@@ -1,8 +1,10 @@
-import { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
-
-let theme: ThemeProviderProps;
+import { Theme } from "@mui/material";
 
 export const mainComponentStyles = {
+  outerContainer: {
+    bgcolor: (theme: Theme) => theme.palette.primary.light,
+    height: "100vh",
+  },
   mainPageContainer: {
     position: "absolute",
     top: "15%",
@@ -10,6 +12,7 @@ export const mainComponentStyles = {
     width: "700px",
     height: "600px",
     borderRadius: "10px",
+    bgcolor: (theme: Theme) => theme.palette.info.main,
   },
   switchMuiSwitchThumb: {
     width: 32,
